@@ -10,3 +10,16 @@ jobs:
     - uses: actions/checkout@master
     - uses: rojopolis/spellcheck-github-actions@0.17.0
       name: Spellcheck
+  build-errors:
+    name: 'Spellcheck with ::error::'
+    runs-on: ubuntu-latest
+    steps:
+    # The checkout step
+    - uses: actions/checkout@master
+    - run: |
+        wget https://raw.githubusercontent.com/riccardoporreca/spellcheck-github-actions/actions-error-message/entrypoint.sh
+        chmod +x entrypoint.sh
+    - uses: rojopolis/spellcheck-github-actions@0.17.0
+      name: Spellcheck
+      with:
+        entrypoint: ./entrypoint.sh
